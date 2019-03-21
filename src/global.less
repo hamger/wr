@@ -1,0 +1,39 @@
+@blue: #28b7ef;
+@grey: #AFAFAF;
+@black: #39404D;
+
+* {
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+
+html, body, :global(#root) {
+  background: #fff;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, 
+ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+	margin:0; padding:0;
+} 
+h1, h2, h3, h4, h5, h6{ font-size:100%;} 
+ul, ol { list-style:none; } 
+a { text-decoration:none; } 
+a:hover { text-decoration:underline; } 
+sup { vertical-align:text-top; } 
+sub{ vertical-align:text-bottom; } 
+button, input, select, textarea { font-size:100%; } 
+table { border-collapse:collapse; border-spacing:0; } 
+
+.clearfix::before,
+.clearfix::after{
+    content: "";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+.clearfix:after{clear:both;} 
+.clearfix{ 
+    *zoom:1;/*IE/7/6*/
+}

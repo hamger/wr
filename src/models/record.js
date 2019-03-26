@@ -2,7 +2,7 @@ export default {
   namespace: 'record',
 
   state: {
-    voteStatus: 0,
+    voteStatus: 0, // 0 正常模式，1 投票模式
     amount: 12,
     players: [
       { id: 0, identity: '未知', status: '存活', voted: 0 },

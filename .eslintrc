@@ -1,11 +1,6 @@
 {
   "extends": "eslint-config-umi",
-  "plugins": [
-    "react-hooks"
-  ],
   "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "no-undef": 0,
     "no-new": 0,
     "no-useless-constructor": 0,
@@ -16,6 +11,7 @@
     "comma-dangle": 0,
     "no-redeclare": 0,
     "one-var": 0,
-    "no-eval": 0
+    "no-eval": 0,
+    "operator-linebrea": 0
   }
 }

@@ -20,43 +20,42 @@ class PlayersPanel extends Component {
   componentDidMount() {
     let that = this;
     let playersArr = this.props.record.players;
-    for (let i = 0; i < this.props.record.amount; i++) {
-      new ParaPicker({
-        inputId: `player-${i}`,
-        title: `${i + 1}号玩家`,
-        data: selectItems,
-        beforeShow: function() {
-          if (that.props.record.voteStatus) {
-            this.forbidSelect(true);
-            if (playersArr[i].status !== '死亡') {
-              if (playersArr[i].voted) {
-                playersArr[i].voted = 0;
-              } else {
-                playersArr[i].voted = 1;
-              }
-              var tempVote = that.props.record.tempVote;
-              var idx = tempVote.indexOf(i);
-              if (idx > -1 && playersArr[i].voted === 0) {
-                tempVote.splice(idx, 1);
-              }
-              if (idx === -1 && playersArr[i].voted === 1) {
-                tempVote.push(i);
-              }
-              that.props.dispatch({
-                type: 'record/changePlayers',
-                payload: playersArr,
-                tempVote,
-              });
-            }
-          } else {
-            this.forbidSelect(false);
-          }
-        },
-        success: arr => {
-          playersArr[i].identity = arr[0];
-          playersArr[i].status = arr[1];
-          this.setState({ players: playersArr });
-        },
+
+    this.picker = new ParaPicker({
+      data: selectItems,
+      success: function(arr) {
+        const i = this.playerNumber;
+        playersArr[i].identity = arr[0];
+        playersArr[i].status = arr[1];
+        that.setState({ players: playersArr });
+      },
+    });
+  }
+
+  handle(i) {
+    let playersArr = this.props.record.players;
+    if (!this.props.record.voteStatus) {
+      // 正常状态,启用选择器
+      this.picker.playerNumber = i;
+      this.picker.setTitle(i + 1 + '号玩家');
+      this.picker.show();
+    } else {
+      // 投票状态，禁用选择器
+      if (playersArr[i].status === '死亡') return;
+      if (playersArr[i].voted) playersArr[i].voted = 0;
+      else playersArr[i].voted = 1;
+      var tempVote = this.props.record.tempVote;
+      var idx = tempVote.indexOf(i);
+      if (idx > -1 && playersArr[i].voted === 0) {
+        tempVote.splice(idx, 1);
+      }
+      if (idx === -1 && playersArr[i].voted === 1) {
+        tempVote.push(i);
+      }
+      this.props.dispatch({
+        type: 'record/changePlayers',
+        payload: playersArr,
+        tempVote,
       });
     }
   }
@@ -76,6 +75,7 @@ class PlayersPanel extends Component {
                 key={item.id}
                 id={`player-${item.id}`}
                 className={styles.player}
+                onClick={this.handle.bind(this, item.id)}
                 style={{
                   backgroundColor:
                     item.status === '存活' ?

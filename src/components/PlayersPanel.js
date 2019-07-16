@@ -5,6 +5,8 @@ import 'hg-parapicker/picker.css';
 import ParaPicker from 'hg-parapicker';
 import { Affix } from 'antd';
 
+console.log(styles);
+
 const selectItems = [['未知', '平民', '狼人'], ['存活', '死亡', '警长']];
 
 class PlayersPanel extends Component {

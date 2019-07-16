@@ -84,7 +84,7 @@ const Allocation = ({ allocation, dispatch }) => {
 
 Allocation.propTypes = {};
 
-// 函数的返回值作为 props 传入组件222
+// 函数的返回值作为 props 传入组件
 function mapStateToProps(state) {
   // {key : state.命名空间}
   return {
